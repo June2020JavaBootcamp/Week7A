@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <div th:replace="base :: headerfg"></div>
+</head>
+<body>
+<div th:replace="base :: navlinksfg"></div>
+
+<h2>Welcome to The Library!</h2>
+
+<table class="table">
+    <thead class="thead-primary">
+    <th scope="col-3">Book Image</th>
+    <th scope="col-3">Book Title</th>
+    <th scope="col-3">Author</th>
+    <th scope="col-3">Category</th>
+    <th scope="col-3">Details</th>
+    </thead>
+
+    <tbody>
+    <tr th:each="book : ${book}">
+        <td><img th:src="${book.bookImage}"/></td>
+        <td th:text="${book.bookTitle}"></td>
+        <td th:text="${book.bookAuthor}"></td>
+        <td th:text="${book.category}"></td>
+        <td>
+            <button><a th:href="@{/viewBookDetails/{id}(id=${book.id})}">Details</a></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<div th:replace="base :: footerfg"></div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book Category</title>
+    <div th:replace="base :: headerfg"></div>
+</head>
+<body>
+<div th:replace="base :: navlinksfg"></div>
+
+<form th:action="@{/admin/processAddCategory}" th:object="${category}" method="post"
+      onsubmit="return validate()">
+    <input type="hidden" th:field="*{id}"/>
+
+    Category Name: <input type="text" id="categoryName" placeholder="Category"
+                          th:field="*{categoryName}"/>
+    <span id="category-error-message"></span>
+    <br/>
+    <br/>
+    <input type="Submit" value="Add">
+
+</form>
+
+<div th:replace="base :: footerfg"></div>
+<script th:src="@{/js/validation.js}"></script>
+</body>
+</html>
