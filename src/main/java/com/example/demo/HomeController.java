@@ -79,18 +79,18 @@ public class HomeController {
 
 
     @RequestMapping("/admin/updateBook/{id}")
-    public String updateBook(@PathVariable("id") Long id, Model model){
+    public String updateBook(@PathVariable("id") Long id,  Model model){
         model.addAttribute("book",bookRepository.findById(id).get());
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("message", "New image required for update");
         return "addBook";
     }
 
     @RequestMapping("/viewBookDetails/{id}")
-    public String bookDetails(@PathVariable("id") long id,Model model){
+    public String bookDetails(@PathVariable("id") long id, Model model){
         Book book = bookRepository.findById(id).get();
         model.addAttribute("book", book);
         return "bookDetails";
     }
-
 
 }

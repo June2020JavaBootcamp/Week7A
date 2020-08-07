@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Add Book</title>
     <div th:replace="base :: headerfg"></div>
+    <style>
+        p {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="base :: navlinksfg"></div>
@@ -29,6 +34,7 @@
            th:field="*{bookAuthor}"/>
     <span id="bookAuthor-error-message"></span>
     <br/>
+
     Book Category:
     <select th:field="*{category}">
         <option th:each="category : ${categories}"
@@ -43,6 +49,7 @@
            th:field="*{bookYear}"/>
     <span id="bookYear-error-message"></span>
     <br/>
+
     ISBN:
     <input type="text" id="bookISBN" placeholder="ISBN"
            th:field="*{bookISBN}"/>
@@ -53,6 +60,7 @@
            th:field="*{bookQuantity}"/>
     <span id="bookQuantity-error-message"></span>
     <br/>
+
     In Stock:
     <input type="radio" id="bookInStock" value="true"
            th:field="*{bookInStock}"><label for="bookInStock">In Stock</label>
@@ -61,6 +69,7 @@
            th:field="*{bookInStock}"><label for="bookInStock">Out of Stock</label>
 
     <br/>
+    <p class="message" th:if="${message}">[[${message}]]</p>
     Book Image (*Required):
     <input type="file" id="bookImage" name="file"><br/>
     *For best results, please upload a small-sized image.

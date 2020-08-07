@@ -1,10 +1,10 @@
-function validate(){
+function validate() {
     var formMeetsRequirements = true;
 
     var categoryName = document.getElementById("categoryName").value;
     var categoryError = document.getElementById("category-error-message");
 
-    if (!categoryName ||  categoryName.match(/[^a-zA-Z]/)) {
+    if (!categoryName || categoryName.match(/[^a-zA-Z]/)) {
         categoryError.innerHTML = "Please enter a category (no special characters)";
         formMeetsRequirements = false;
     } else if (!categoryName.replace(/\s/g, '').length) {
@@ -14,7 +14,7 @@ function validate(){
     return formMeetsRequirements;
 }
 
-function validateAddBook(){
+function validateAddBook() {
     var formComplete = true;
 
     var bookTitle = document.getElementById("bookTitle").value;
@@ -22,6 +22,7 @@ function validateAddBook(){
     var bookYear = document.getElementById("bookYear").value;
     var bookISBN = document.getElementById("bookISBN").value;
     var bookQuantity = document.getElementById("bookQuantity").value;
+
 
     var bookTitleError = document.getElementById("bookTitle-error-message");
     var bookAuthorError = document.getElementById("bookAuthor-error-message");
@@ -35,43 +36,43 @@ function validateAddBook(){
     }
 
     //title
-    if (!bookTitle){
+    if (!bookTitle) {
         bookTitleError.innerHTML = "Please enter a book title";
         formComplete = false
-    } else if (!bookTitle.replace(/\s/g, '').length){
+    } else if (!bookTitle.replace(/\s/g, '').length) {
         bookTitleError.innerHTML = "Only whitespace detected";
         formComplete = false
     }
     //Author
-    if (!bookAuthor){
+    if (!bookAuthor) {
         bookAuthorError.innerHTML = "Please enter the book's author";
         formComplete = false
-    } else if (!bookAuthor.replace(/\s/g, '').length){
+    } else if (!bookAuthor.replace(/\s/g, '').length) {
         bookTitleError.innerHTML = "Only whitespace detected";
         formComplete = false
     }
-    //Year
-    if (!bookYear || bookYear.match(/[a-zA-Z]/)){
+//Year
+    if (!bookYear || bookYear.match(/[a-zA-Z]/)) {
         bookYearError.innerHTML = "Please enter the publish year (numbers only)";
         formComplete = false
-    } else if (!bookYear.replace(/\s/g, '').length){
+    } else if (!bookYear.replace(/\s/g, '').length) {
         bookYear.innerHTML = "Only whitespace detected";
         formComplete = false
     }
-    //ISBN
-    if (!bookISBN || bookISBN.match(/[a-zA-Z]/)){
+//ISBN
+    if (!bookISBN || bookISBN.match(/[a-zA-Z]/)) {
         bookISBNError.innerHTML = "Please enter the ISBN (numbers only)";
         formComplete = false
-    } else if (!bookISBN.replace(/\s/g, '').length){
+    } else if (!bookISBN.replace(/\s/g, '').length) {
         bookYear.innerHTML = "Only whitespace detected";
         formComplete = false
     }
 
-    //Quantity
-    if (!bookQuantity || bookQuantity.match(/[a-zA-Z]/)){
+//Quantity
+    if (!bookQuantity || bookQuantity.match(/[a-zA-Z]/)) {
         bookQuantityError.innerHTML = "Please enter the quantity (numbers only)";
         formComplete = false
-    } else if (!bookQuantity.replace(/\s/g, '').length){
+    } else if (!bookQuantity.replace(/\s/g, '').length) {
         bookYear.innerHTML = "Only whitespace detected";
         formComplete = false
     }
