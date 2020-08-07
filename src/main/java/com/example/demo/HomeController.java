@@ -1,9 +1,7 @@
 package com.example.demo;
 
 import com.cloudinary.utils.ObjectUtils;
-import com.oracle.tools.packager.mac.MacAppBundler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.IdentifierProcessing;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +53,7 @@ public class HomeController {
     }
 
     @PostMapping("/admin/processAddBook")
-    public String processAddBook(@ModelAttribute Book book, @RequestParam("file") MultipartFile file, Model model){
+    public String processAddBook(@ModelAttribute Book book, @RequestParam("file") MultipartFile file){
         if(file.isEmpty()){
             return "redirect:/admin/addBook";
         }
