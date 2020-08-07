@@ -2,27 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Admin View - Books</title>
     <div th:replace="base :: headerfg"></div>
 </head>
 <body>
 <div th:replace="base :: navlinksfg"></div>
 
+<h2>Books</h2>
+
 <table class="table">
-    <thead class="thead-primary">
-    <th scope="col-3">Book Image</th>
+    <thead class="thead-light">
+    <th scope="col-2">Book Image</th>
     <th scope="col-3">Book Title</th>
-    <th scope="col-3">Category</th>
-    <th scope="col-3">Details</th>
+    <th scope="col-3">Author</th>
+    <th scope="col-2">Category</th>
+    <th scope="col-2">Details</th>
     </thead>
 
     <tbody>
     <tr th:each="book : ${book}">
         <td><img th:src="${book.bookImage}"/></td>
         <td th:text="${book.bookTitle}"></td>
+        <td th:text="${book.bookAuthor}"></td>
         <td th:text="${book.category}"></td>
         <td>
             <button><a th:href="@{/viewBookDetails/{id}(id=${book.id})}">Details</a></button>
+            <button><a th:href="@{/admin/updateBook/{id}(id=${book.id})}">Edit</a></button>
         </td>
     </tr>
     </tbody>

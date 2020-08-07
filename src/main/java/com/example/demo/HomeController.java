@@ -1,12 +1,16 @@
 package com.example.demo;
 
+import com.cloudinary.utils.ObjectUtils;
+import com.oracle.tools.packager.mac.MacAppBundler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.IdentifierProcessing;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -16,6 +20,9 @@ public class HomeController {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    CloudinaryConfiguration cloudinaryConfiguration;
 
     @RequestMapping("/")
     public String index(Model model){
@@ -48,8 +55,41 @@ public class HomeController {
     }
 
     @PostMapping("/admin/processAddBook")
-    public String processAddBook(@ModelAttribute Book book, Model model){
+    public String processAddBook(@ModelAttribute Book book, @RequestParam("file") MultipartFile file, Model model){
+        if(file.isEmpty()){
+            return "redirect:/admin/addBook";
+        }
+        try {
+            Map uplaodResult = cloudinaryConfiguration.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+            book.setBookImage(uplaodResult.get("url").toString());
+            bookRepository.save(book);
+        }catch (IOException e){
+            e.printStackTrace();
+            return "redirect:/admin/addBook";
+        }
 
+    return "redirect:/admin/viewBooks";
+    }
+
+    @RequestMapping("/admin/viewBooks")
+    public String adminViewBooks(Model model){
+        model.addAttribute("book", bookRepository.findAll());
+        return "adminViewBooks";
+    }
+
+
+    @RequestMapping("/admin/updateBook/{id}")
+    public String updateBook(@PathVariable("id") Long id, Model model){
+        model.addAttribute("book",bookRepository.findById(id).get());
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "addBook";
+    }
+
+    @RequestMapping("/viewBookDetails/{id}")
+    public String bookDetails(@PathVariable("id") long id,Model model){
+        Book book = bookRepository.findById(id).get();
+        model.addAttribute("book", book);
+        return "bookDetails";
     }
 
 

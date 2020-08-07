@@ -3,13 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Book</title>
+    <div th:replace="base :: headerfg"></div>
 </head>
 <body>
+<div th:replace="base :: navlinksfg"></div>
 
-<h4>Add New Book</h4>
+<h4>Book Information</h4>
 
 <form autocomplete="off" th:action="@{/admin/processAddBook}"
+      th:object="${book}"
+      method="post"
+      enctype="multipart/form-data"
+      onsubmit="return validateAddBook()">
 
+    <input type="hidden" th:field="*{id}"/>
 
+    Book Title:
+    <input type="text" id="bookTitle" placeholder="Book Title"
+           th:field="*{bookTitle}"/>
+    <span id="bookTitle-error-message"></span>
+    <br/>
+
+    Book Author:
+    <input type="text" id="bookAuthor" placeholder="Book Author"
+           th:field="*{bookAuthor}"/>
+    <span id="bookAuthor-error-message"></span>
+    <br/>
+    Book Category:
+    <select th:field="*{category}">
+        <option th:each="category : ${categories}"
+                th:value="${category.id}"
+                th:text="${category.categoryName}">
+        </option>
+    </select>
+    <br/>
+
+    Published Year:
+    <input type="text" id="bookYear" placeholder="Published Year"
+           th:field="*{bookYear}"/>
+    <span id="bookYear-error-message"></span>
+    <br/>
+    ISBN:
+    <input type="text" id="bookISBN" placeholder="ISBN"
+           th:field="*{bookISBN}"/>
+    <span id="bookISBN-error-message"></span>
+    <br/>
+    Quantity:
+    <input type="text" id="bookQuantity" placeholder="Quantity"
+           th:field="*{bookQuantity}"/>
+    <span id="bookQuantity-error-message"></span>
+    <br/>
+    In Stock:
+    <input type="radio" id="bookInStock" value="true"
+           th:field="*{bookInStock}"><label for="bookInStock">In Stock</label>
+
+    <input type="radio" id="bookOutOfStock" value="false"
+           th:field="*{bookInStock}"><label for="bookInStock">Out of Stock</label>
+
+    <br/>
+    Book Image (*Required):
+    <input type="file" id="bookImage" name="file"><br/>
+    *For best results, please upload a small-sized image.
+    <br/>
+    <br/>
+
+    <input type="submit" value="Submit"/>
+
+</form>
+
+<div th:replace="base :: footerfg"></div>
+<script th:src="@{/js/validation.js}"></script>
 </body>
 </html>

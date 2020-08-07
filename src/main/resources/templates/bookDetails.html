@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Details</title>
+    <div th:replace="base :: headerfg"></div>
+</head>
+<body>
+<div th:replace="base :: navlinksfg"></div>
+
+<h4>Book Details</h4>
+
+<img th:src="${book.bookImage}"/>
+<br/>
+
+Title: [[${book.bookTitle}]]
+<br/>
+Author: [[${book.bookAuthor}]]
+<br/>
+Category: [[${book.category}]]
+<br/>
+Published In: [[${book.bookYear}]]
+<br/>
+Availability:
+<div th:switch="${book.bookInStock}">
+    <span th:case="true">In Stock</span>
+    <span th:case="false">Out of Stock</span>
+</div>
+
+</body>
+</html>
